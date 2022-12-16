@@ -30,7 +30,7 @@ export default function Convert() {
     // Datos de la API
     getData()
   }, []);
-
+//Estado que vuelve a renderizar la aplicación 
   useEffect(_ => {
     let a,b
     coin.forEach(({symbol, current_price}) =>{
@@ -40,6 +40,7 @@ export default function Convert() {
         b = current_price
       }
     })
+    //Se ejecuta cuando hay un cambio en mainTxt, selCoin1 o en selCoin2
      a ? setRes(a / b) : setRes(0)
   },[mainTxt,selCoin1,selCoin2])
 
