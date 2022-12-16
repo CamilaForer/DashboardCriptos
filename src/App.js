@@ -8,16 +8,13 @@ import Card from './Card'
 import Convert from './Convert';
 import Footer from './Footer'
 import Header from './Header'
-import {ThemeProvider} from "./Context/ThemeProvider";
+
 
 export default function App() {
   const [coins, setCoins] = useState()
   const [currency, setCurrency] = useState()
   const [selCur, setSelCur] = useState("usd")
   const getData = async () =>{
-    /* const res = await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=4&page=1&sparkline=false&price_change_percentage=24h")
-    console.log(res.data);
-    setCoins(res.data); */
     const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${selCur}&order=market_cap_desc&per_page=4&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d%2C30d%2C90d%2C1y`)
     const json = await response.json()
     const response_cur = await fetch("https://api.coingecko.com/api/v3/simple/supported_vs_currencies")
@@ -48,9 +45,7 @@ export default function App() {
   return (
     !coins ? "Cargando..." :(
     <div className='App'>
-       <ThemeProvider>
         <Header currencys={currency} fun={setSelCur} cur={selCur}/>
-       </ThemeProvider>
       <main>
         <CardPrincipal json={coins[0]} cur={selCur}/>
         <div className="cards_con">
